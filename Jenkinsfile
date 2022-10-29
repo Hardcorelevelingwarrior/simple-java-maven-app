@@ -48,12 +48,7 @@ podTemplate(yaml: '''
             recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/target/pmd.xml')
           }
 
-          
-        }  
-        
-        }
-      
-     stage('ZAP') {
+          stage('ZAP') {
                     sh 'mvn zap:analyze'
                     publishHTML(target: [
                             allowMissing         : false,
@@ -64,6 +59,11 @@ podTemplate(yaml: '''
                             reportName           : "ZAP report"
                     ])   
         }
+        }  
+        
+        }
+      
+     
 
     stage('Build & Test the Docker Image') {
       container('kaniko') {

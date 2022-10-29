@@ -1,4 +1,3 @@
-
 podTemplate(yaml: '''
     apiVersion: v1
     kind: Pod
@@ -32,24 +31,31 @@ podTemplate(yaml: '''
     stage('Get the project') {
       git url: 'https://github.com/Hardcorelevelingwarrior/simple-java-maven-app.git', branch: 'master'
       container('maven') {
-        stage('Test the project') {
+        stage('Build and test the project') {
           sh '''
-          echo pwd
           mvn -B -DskipTests clean package
           mvn test
-          '''
-          junit 'target/surefire-reports/*.xml'
-            
-          sh 'mvn dependency-check:check'
-          dependencyCheckPublisher pattern: ''
-          sh 'mvn pmd:pmd pmd:cpd spotbugs:spotbugs'
-          recordIssues enabledForFailure: true, tool: spotBugs()
-          recordIssues enabledForFailure: true, tool: cpd(pattern: '**/target/cpd.xml')
-          recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/target/pmd.xml')
-         
+          ''' }
+        stage('Publish test result'){
+          junit 'target/surefire-reports/*.xml'}
+        stage('SCA and SAST scan'){
+          parallel{
+            stage('Dependency check and publish result'){
+            sh 'mvn dependency-check:check'
+            dependencyCheckPublisher pattern: ''}
+        stage('SAST test and publish result'){
+            sh 'mvn pmd:pmd pmd:cpd spotbugs:spotbugs'
+            recordIssues enabledForFailure: true, tool: spotBugs()
+            recordIssues enabledForFailure: true, tool: cpd(pattern: '**/target/cpd.xml')
+            recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/target/pmd.xml')
+          }
+
+          }
+        }  
+        
         }
       }
-    }
+    
 
     stage('Build & Test the Docker Image') {
       container('kaniko') {

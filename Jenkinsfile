@@ -59,7 +59,7 @@ podTemplate(yaml: '''
       container('kaniko') {
         stage('Deploy to DockerHub') {
           sh '''
-            /kaniko/executor --context `pwd` --destination conmeobeou1253/helloworld:latest
+            /kaniko/executor --context `pwd` --destination conmeobeou1253/Mavendemo:latest
           '''
         }
       }

@@ -70,7 +70,7 @@
       <plugin>
     <groupId>br.com.softplan.security.zap</groupId>
     <artifactId>zap-maven-plugin</artifactId>
-    <version>${zap-maven-plugin.version}</version>
+    <version>1.2.1-0</version>
     <configuration>
         <!-- Configuration parameters -->
     </configuration>

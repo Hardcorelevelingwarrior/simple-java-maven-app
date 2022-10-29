@@ -53,7 +53,21 @@ podTemplate(yaml: '''
         
         }
       
-    
+     stage('ZAP') {
+            steps {
+                withMaven(maven: 'mvn-3.6.3') {
+                    sh 'mvn zap:analyze'
+                    publishHTML(target: [
+                            allowMissing         : false,
+                            alwaysLinkToLastBuild: false,
+                            keepAll              : true,
+                            reportDir            : 'target/zap-reports',
+                            reportFiles          : 'zapReport.html',
+                            reportName           : "ZAP report"
+                    ])
+                }
+            }
+        }
 
     stage('Build & Test the Docker Image') {
       container('kaniko') {

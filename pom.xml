@@ -68,6 +68,21 @@
             </plugin>
       
       <plugin>
+    <groupId>br.com.softplan.security.zap</groupId>
+    <artifactId>zap-maven-plugin</artifactId>
+    <version>${zap-maven-plugin.version}</version>
+    <configuration>
+        <!-- Configuration parameters -->
+    </configuration>
+    <executions>
+        <execution>
+            <phase>verify</phase>
+            <goals><goal>analyze</goal></goals>
+        </execution>
+    </executions>
+</plugin>
+      
+      <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
                 <version>4.2.0</version>

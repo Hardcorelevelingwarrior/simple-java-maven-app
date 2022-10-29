@@ -34,7 +34,6 @@ podTemplate(yaml: '''
       container('maven') {
         stage('Test the project') {
           sh '''
-          echo pwd
           mvn -B -DskipTests clean package
           mvn test
           '''

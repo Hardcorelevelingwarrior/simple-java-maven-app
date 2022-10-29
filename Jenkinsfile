@@ -38,8 +38,6 @@ podTemplate(yaml: '''
           ''' }
         stage('Publish test result'){
           junit 'target/surefire-reports/*.xml'}
-        stage('SCA and SAST scan'){
-          parallel{
             stage('Dependency check and publish result'){
             sh 'mvn dependency-check:check'
             dependencyCheckPublisher pattern: ''}
@@ -50,11 +48,11 @@ podTemplate(yaml: '''
             recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/target/pmd.xml')
           }
 
-          }
+          
         }  
         
         }
-      }
+      
     
 
     stage('Build & Test the Docker Image') {

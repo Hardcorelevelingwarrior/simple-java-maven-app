@@ -48,17 +48,6 @@ podTemplate(yaml: '''
             recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/target/pmd.xml')
           }
 
-          stage('ZAP') {
-                    sh 'mvn zap:analyze'
-                    publishHTML(target: [
-                            allowMissing         : false,
-                            alwaysLinkToLastBuild: false,
-                            keepAll              : true,
-                            reportDir            : 'target/zap-reports',
-                            reportFiles          : 'zapReport.html',
-                            reportName           : "ZAP report"
-                    ])   
-        }
         }  
         
         }

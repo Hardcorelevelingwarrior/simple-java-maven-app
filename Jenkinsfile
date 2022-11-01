@@ -61,6 +61,13 @@ podTemplate(yaml: '''
             /kaniko/executor --context `pwd` --destination conmeobeou1253/mavendemo:latest
           '''
         }
+             stage('Anchore analyse') {  
+    steps {  
+     writeFile file: 'anchore_images', text: 'https://hub.docker.com/repository/docker/conmeobeou1253/mavendemo'  
+     anchore name: 'anchore_images'  
+    }  
+   }  
+
       }
     }
 

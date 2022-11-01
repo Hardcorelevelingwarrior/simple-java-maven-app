@@ -63,7 +63,7 @@ podTemplate(yaml: '''
         }
              stage('Anchore analyse') {  
 
-     writeFile file: 'anchore_images', text: 'docker.io/conmeobeou1253/mavendemo:lastest'  
+     writeFile file: 'anchore_images', text: 'docker.io/conmeobeou1253/mavendemo'  
      anchore name: 'anchore_images'  
     
    }  

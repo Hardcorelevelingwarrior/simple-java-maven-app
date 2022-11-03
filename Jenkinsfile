@@ -64,6 +64,11 @@ podTemplate(yaml: '''
              stage('Anchore analyse') {  
      writeFile file: 'anchore_images', text: 'docker.io/conmeobeou1253/mavendemo'  
      anchore bailOnFail: false, bailOnPluginFail: false, name: 'anchore_images'
+     withKubeConfig([credentialsId: 'kubernetes-config']) {  
+      sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"'  
+      sh 'chmod u+x ./kubectl'  
+      sh './kubectl apply -f k8s.yaml'  
+     }  
      
      }  
    }  

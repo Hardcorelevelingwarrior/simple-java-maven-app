@@ -3,8 +3,8 @@ podTemplate(yaml: '''
     kind: Pod
     spec:
       containers:
-      - name: ubuntu
-        image: ubuntu:focal
+      - name: alpine
+        image: conmeobeou1253/agent:latest
         command:
         - sleep
         args:

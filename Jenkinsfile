@@ -7,7 +7,7 @@ podTemplate(yaml: '''
         image: conmeobeou1253/mavencurl:1.1
         imagePullPolicy: IfNotPresent
         command:
-        -sleep
+        - sleep
       - name: kaniko
         image: gcr.io/kaniko-project/executor:debug
         command:

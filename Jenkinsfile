@@ -7,6 +7,8 @@ podTemplate(yaml: '''
         image: curlimages/curl
         command:
         - sleep
+        args:
+        - 99d
       - name: maven
         image: maven:3.8.1-jdk-8
         command:

@@ -3,8 +3,8 @@ podTemplate(yaml: '''
     kind: Pod
     spec:
       containers:
-      - name: alpine
-        image: conmeobeou1253/agent:latest
+      - name: ubuntu
+        image: conmeobeou1253/ubuntu:latest
         command:
         - sleep
         args:
@@ -76,7 +76,7 @@ podTemplate(yaml: '''
 
       }
     stage("Image to container"){
-        container('alpine'){
+        container('ubuntu'){
             stage('Deploy to K8s') {
       
         withKubeConfig([credentialsId: 'kubernetes-config']) {

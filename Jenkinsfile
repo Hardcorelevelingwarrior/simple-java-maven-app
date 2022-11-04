@@ -3,12 +3,6 @@ podTemplate(yaml: '''
     kind: Pod
     spec:
       containers:
-      - name: curl
-        image: curlimages/curl
-        command:
-        - sleep
-        args:
-        - 99d
       - name: maven
         image: maven:3.8.1-jdk-8
         command:
@@ -76,11 +70,11 @@ podTemplate(yaml: '''
 
       }
     stage("Image to container"){
-        container('curl'){
+        container('maven'){
             stage('Deploy to K8s') {
       
         withKubeConfig([credentialsId: 'kubernetes-config']) {
-          sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"'
+          httpRequest ignoreSslErrors: true, responseHandle: 'NONE', url: 'https://storage.googleapis.com/kubernetes-release/release/v1.25.3/bin/linux/amd64/kubectl', wrapAsMultipart: false
           sh 'chmod u+x ./kubectl'
           sh './kubectl apply -f k8s.yaml'
         

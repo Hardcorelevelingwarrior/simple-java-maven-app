@@ -4,7 +4,7 @@ podTemplate(yaml: '''
     spec:
       containers:
       - name: maven
-        image: conmeobeou1253/mavencurl
+        image: conmeobeou1253/mavencurl:1.1
         command:
         - sleep
         args:

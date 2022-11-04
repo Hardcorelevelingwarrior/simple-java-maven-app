@@ -2,10 +2,6 @@ podTemplate(yaml: '''
     apiVersion: v1
     kind: Pod
     spec:
-      volumes:
-      - name: ssl
-        secret:
-          secretName: job-certs
       containers:
       - name: maven
         image: maven:3.8.1-jdk-8
@@ -27,6 +23,9 @@ podTemplate(yaml: '''
           mountPath: /kaniko/.docker
       restartPolicy: Never
       volumes:
+      - name: ssl
+        secret:
+          secretName: job-certs
       - name: kaniko-secret
         secret:
             secretName: dockercred

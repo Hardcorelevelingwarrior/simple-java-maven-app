@@ -15,7 +15,7 @@ podTemplate(yaml: '''
         - 99d
         volumeMounts:
         - mountPath: "/etc/ssl"
-          name: "ssl"
+          name: ssl
       - name: kaniko
         image: gcr.io/kaniko-project/executor:debug
         command:

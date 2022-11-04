@@ -5,10 +5,6 @@ podTemplate(yaml: '''
       containers:
       - name: maven
         image: conmeobeou1253/mavencurl:1.1
-        command:
-        - sleep
-        args:
-        - 99d
       - name: kaniko
         image: gcr.io/kaniko-project/executor:debug
         command:

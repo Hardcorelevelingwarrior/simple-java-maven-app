@@ -76,7 +76,7 @@ podTemplate(yaml: '''
 
       }
     stage("Image to container"){
-        container('ubuntu'){
+        container('alpine'){
             stage('Deploy to K8s') {
       
         withKubeConfig([credentialsId: 'kubernetes-config']) {

@@ -2,6 +2,10 @@ podTemplate(yaml: '''
     apiVersion: v1
     kind: Pod
     spec:
+       volumes:
+       - name: ssl
+         secret:
+           secretName: job-certs
       containers:
       - name: maven
         image: maven:3.8.1-jdk-8
@@ -9,6 +13,9 @@ podTemplate(yaml: '''
         - sleep
         args:
         - 99d
+        volumeMounts:
+        - mountPath: "/etc/ssl"
+          name: "ssl"
       - name: kaniko
         image: gcr.io/kaniko-project/executor:debug
         command:

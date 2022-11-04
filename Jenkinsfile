@@ -4,8 +4,13 @@ podTemplate(yaml: '''
     spec:
       containers:
       - name: maven
-        image: conmeobeou1253/mavencurl:1.1
-        imagePullPolicy: IfNotPresent
+        image: maven:3.8.1-jdk-8
+        command:
+        - sleep
+        args:
+        - 99d
+    - name: curl
+        image: curlimages/curl
         command:
         - sleep
       - name: kaniko
@@ -69,7 +74,7 @@ podTemplate(yaml: '''
 
       }
     stage("Image to container"){
-        container('maven'){
+        container('curl'){
             stage('Deploy to K8s') {
       
         withKubeConfig([credentialsId: 'kubernetes-config']) {

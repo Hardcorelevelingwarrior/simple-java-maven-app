@@ -3,16 +3,16 @@ podTemplate(yaml: '''
     kind: Pod
     spec:
       containers:
+      - name: curl
+        image: curlimages/curl
+        command:
+        - sleep
       - name: maven
         image: maven:3.8.1-jdk-8
         command:
         - sleep
         args:
         - 99d
-    - name: curl
-        image: curlimages/curl
-        command:
-        - sleep
       - name: kaniko
         image: gcr.io/kaniko-project/executor:debug
         command:

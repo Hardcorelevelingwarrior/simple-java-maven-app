@@ -2,10 +2,10 @@ podTemplate(yaml: '''
     apiVersion: v1
     kind: Pod
     spec:
-       volumes:
-       - name: ssl
-         secret:
-           secretName: job-certs
+      volumes:
+      - name: ssl
+        secret:
+          secretName: job-certs
       containers:
       - name: maven
         image: maven:3.8.1-jdk-8

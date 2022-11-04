@@ -4,7 +4,7 @@ podTemplate(yaml: '''
     spec:
       containers:
       - name: ubuntu
-        image ubuntu:ubuntu:focal
+        image: ubuntu:focal
         command:
         - sleep
         args:

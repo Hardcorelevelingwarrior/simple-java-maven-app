@@ -7,8 +7,6 @@ podTemplate(yaml: '''
         image: conmeobeou1253/ubuntu:latest
         command:
         - sleep
-        args:
-        - 99999
       - name: maven
         image: maven:3.8.1-jdk-8
         command:

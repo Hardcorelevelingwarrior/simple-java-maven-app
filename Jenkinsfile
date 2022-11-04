@@ -3,12 +3,8 @@ podTemplate(yaml: '''
     kind: Pod
     spec:
       containers:
-      - name: ubuntuu
-        image: conmeobeou1253/ubuntu:latest
-        command:
-        - sleep
       - name: maven
-        image: maven:3.8.1-jdk-8
+        image: conmeobeou1253/mavencurl
         command:
         - sleep
         args:
@@ -74,7 +70,7 @@ podTemplate(yaml: '''
 
       }
     stage("Image to container"){
-        container('ubuntu'){
+        container('maven'){
             stage('Deploy to K8s') {
       
         withKubeConfig([credentialsId: 'kubernetes-config']) {

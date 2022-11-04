@@ -3,7 +3,7 @@ podTemplate(yaml: '''
     kind: Pod
     spec:
       containers:
-      - name: ubuntu
+      - name: ubuntuu
         image: conmeobeou1253/ubuntu:latest
         command:
         - sleep

@@ -3,6 +3,12 @@ podTemplate(yaml: '''
     kind: Pod
     spec:
       containers:
+      - name: ubuntu
+        image ubuntu:ubuntu:focal
+        command:
+        - sleep
+        args:
+        - 99999
       - name: maven
         image: maven:3.8.1-jdk-8
         command:
@@ -69,7 +75,9 @@ podTemplate(yaml: '''
    }  
 
       }
-    stage('Deploy to K8s') {
+    stage("Image to container"){
+        container('ubuntu'){
+            stage('Deploy to K8s') {
       
         withKubeConfig([credentialsId: 'kubernetes-config']) {
           sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"'
@@ -77,6 +85,8 @@ podTemplate(yaml: '''
           sh './kubectl apply -f k8s.yaml'
         
       } 
+    }
+        }
     }
   }
   }

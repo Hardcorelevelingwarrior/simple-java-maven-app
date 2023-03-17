@@ -18,6 +18,10 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  <properties>
+  <sonar.organization>hardcorelevelingwarrior</sonar.organization>
+  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+</properties>
   <build>
     <pluginManagement>
       <plugins>
